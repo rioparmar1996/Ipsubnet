@@ -1,7 +1,15 @@
-body {
-	height: 100%;
+.container {
+	margin-left: 20% !important;
+	margin-right: 0 !important;
 }
 
-body.container {
+html {
 	height: 100%;
+}
+body {
+	min-height: 100%;
+}
+.tabs {
+	margin-left: 26rem;
+	margin-right: 41rem;
 }

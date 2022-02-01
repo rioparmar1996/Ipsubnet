@@ -37,10 +37,10 @@ function validateIP() {
 	//logic
 	var ipArray = ip.split(".");
 	if (ip == "") {
-		document.getElementById("output").innerHTML = "Enter IP Address Please";
+		document.getElementById("result").innerHTML = "Enter IP Address Please";
 	} else {
 		if (ipArray.length < 4 || ipArray.length > 4) {
-			document.getElementById("output").innerHTML = "Enter correct IP Address";
+			document.getElementById("result").innerHTML = "Enter correct IP Address";
 		} else {
 			a = parseInt(ipArray[0]);
 			b = parseInt(ipArray[1]);
@@ -75,7 +75,7 @@ function validateIP() {
 				checkerObject.push(temp);
 			}
 			if (!checkerObject.length) {
-				document.getElementById("output").innerHTML = msg
+				document.getElementById("result").innerHTML = msg
 					? msg
 					: "This is valid IP Address";
 			} else {
@@ -84,7 +84,7 @@ function validateIP() {
 				checkerObject.map((el) => {
 					string = string + " " + Object.keys(el).toString();
 				});
-				document.getElementById("output").innerHTML = string;
+				document.getElementById("result").innerHTML = string;
 			}
 		}
 	}
@@ -121,6 +121,7 @@ function subnetRange() {
 	const ipAddress = document.forms["subnetRangeForm"]["ipAddress"].value;
 	const subnetValue = document.forms["subnetRangeForm"]["subnetValue"].value;
 	var checkerObject = [];
+	let perData;
 	let msg = "";
 	let temp = undefined;
 	let index = undefined;
@@ -183,7 +184,37 @@ function subnetRange() {
 					maxOctval = 255 - d;
 				}
 			});
-			document.getElementById("output").innerHTML = maxOctval;
+			document.getElementById("output1").innerHTML = maxOctval;
 		}
 	}
+	let stringSubnet = {};
+	for (let i = 0; i <= 255; i++) {
+		stringSubnet[i] = i + maxOctval;
+		i = i + maxOctval;
+	}
+
+	if (!stringSubnet && !perData) {
+		createTable(stringSubnet);
+		perData = stringSubnet;
+		stringSubnet = {};
+	} else {
+		createTable(stringSubnet);
+		stringSubnet = {};
+	}
+}
+
+function createTable(obj) {
+	console.log(true);
+	Object.entries(obj).forEach(([key, value]) => {
+		var cont = document.getElementById("tabs");
+		var p = document.createElement("p");
+		p.innerHTML = `| ${key}  -  ${value} |`;
+		console.log(p);
+		p.setAttribute("id", "theList"); // append li to ul.
+		cont.appendChild(p); // add list to the container.
+	});
+}
+
+function reload() {
+	location.reload();
 }
